@@ -1,0 +1,45 @@
+{
+    "typeName": "Branch::AWS::SSMParameterValue",
+    "description": "Resource that makes the latest version of an SSM parameter store value available to use in CloudFormation.",
+    "sourceUrl": "https://github.com/gobranch/cfn-ssm-parameter-value-resource",
+    "properties": {
+        "ParameterName": {
+            "description": "The name of the parameter in SSM parameter store.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-0_.-\/]+$",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "Value": {
+            "description": "The value of the latest version of this parameter",
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "ParameterName"
+    ],
+    "primaryIdentifier": [
+        "/properties/ParameterName"
+    ],
+    "readOnlyProperties": [
+        "/properties/Value"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "ssm:GetParameter"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "ssm:GetParameter"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "ssm:GetParameter"
+            ]
+        }
+    }
+}

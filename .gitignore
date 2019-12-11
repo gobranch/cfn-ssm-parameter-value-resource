@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+._*
+
+# our logs
+rpdk.log
+
+#compiled file
+bin/
+
+#vender
+vender/
+
+# Python virtual env for CloudFormation CLI
+pyvenv/
+
+# IDEs
+.idea/
