@@ -44,3 +44,9 @@ This has _not_ been tested thoroughly, so use in production at your own risk.
 If you update the provider, submit it again, and then set the default version to the new version that you just submitted: `aws cloudformation set-type-default-version --type RESOURCE --type-name "OurBranch::Custom::ParameterValue" --version-id "00000002"`
 
 You can see what versions you have with `aws cloudformation list-type-versions --type "RESOURCE" --type-name "OurBranch::Custom::SSMParameterValue"`.
+
+## More info
+
+- [AWS documentation on creating custom resource providers](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
+- [CloudFormation CLI](https://github.com/aws-cloudformation/cloudformation-cli)
+- [CloudFormation CLI Go Plugin (includes another example of a GitHub repository CloudFormation resource)](https://github.com/aws-cloudformation/cloudformation-cli-go-plugin/)
