@@ -1,6 +1,6 @@
 # OurBranch::Custom::SSMParameterValue
 
-An example of how to build a CloudFormation resource provider.
+An example of how to build a CloudFormation resource provider in Go.
 
 This resource lets you refer to the latest value of an SSM parameter in your templates:
 
