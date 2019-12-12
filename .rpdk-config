@@ -1,5 +1,5 @@
 {
-    "typeName": "Branch::AWS::SSMParameterValue",
+    "typeName": "OurBranch::Custom::SSMParameterValue",
     "language": "go",
     "runtime": "go1.x",
     "entrypoint": "handler",
