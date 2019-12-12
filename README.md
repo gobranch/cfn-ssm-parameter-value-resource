@@ -1,13 +1,46 @@
 # OurBranch::Custom::SSMParameterValue
 
-Congratulations on starting development!
+An example of how to build a CloudFormation resource provider.
 
-Next steps:
+This resource lets you refer to the latest value of an SSM parameter in your templates:
 
-1. Populate the JSON schema describing your resource, `branch-aws-ssmparametervalue.json`
-2. The RPDK will automatically generate the correct resource model from the
-   schema whenever the project is built via Make.
-   You can also do this manually with the following command: `cfn-cli generate`
-3. Implement your resource handlers by adding code to provision your resources in your resource handler's methods.
+```yml
+Resources:
+  ESHostParameterValue:
+    Type: OurBranch::Custom::SSMParameterValue
+    Properties:
+      ParameterName: es_host
 
-Please don't modify files `model.go and main.go`, as they will be automatically overwritten.
+  SomeLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          ES_HOST: !GetAtt ESHostParameterValue.Value
+```
+
+This has _not_ been tested thoroughly, so use in production at your own risk.
+
+## How to deploy
+
+- Set up your environment:
+  - Python 3.6 or above
+  - Go 1.11 or above
+  - AWS CLI
+
+* Create a Python virtualenv for this project (not mandatory but definitely recommended):
+  - `python3 -m venv pyvenv`
+  - `source pyvenv/bin/activate`
+
+- Install the Python dependencies (CloudFormation CLI and CloudFormation CLI Go plugin)
+  - `pip install -r requirements.txt`
+
+* `make clean`
+* `cfn validate` to validate the schema.
+* `cfn generate` to generate the Go files needed to build the provider from the schema.
+* `make build` to build the provider code.
+* `cfn submit -v` to register the resource in your CloudFormation registry.
+
+If you update the provider, submit it again, and then set the default version to the new version that you just submitted: `aws cloudformation set-type-default-version --type RESOURCE --type-name "OurBranch::Custom::ParameterValue" --version-id "00000002"`
+
+You can see what versions you have with `aws cloudformation list-type-versions --type "RESOURCE" --type-name "OurBranch::Custom::SSMParameterValue"`.
