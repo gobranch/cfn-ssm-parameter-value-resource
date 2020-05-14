@@ -19,7 +19,7 @@ Resources:
           ES_HOST: !GetAtt ESHostParameterValue.Value
 ```
 
-This has _not_ been tested thoroughly, so use in production at your own risk.
+This is just an example, don't use this in your apps. If you want to use SSM parameters in your production templates use [CloudFormation's built-in support for them](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types).
 
 ## How to deploy
 
